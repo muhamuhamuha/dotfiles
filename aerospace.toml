@@ -1,0 +1,213 @@
+# AeroSpace Configuration File (~/.aerospace.toml)
+# Built for a smooth transition from Amethyst to AeroSpace.
+# For full reference, see: https://nikitabobko.github.io/AeroSpace/guide
+
+# Config version for compatibility and deprecations
+config-version = 2
+
+# Start AeroSpace at login
+start-at-login = true
+
+# Automatically reload the config when the config file is saved
+# Note: You must manually reload once (using `aerospace reload-config` or entering Service mode)
+# to activate this auto-reloading mechanism.
+auto-reload-config = true
+
+# =============================================================================
+# Layout & Visual Aesthetics
+# =============================================================================
+
+# Default root container layout (tiles or accordion)
+default-root-container-layout = 'tiles'
+
+# Default orientation (horizontal|vertical|auto)
+# 'auto' splits wide monitors horizontally and tall monitors vertically
+default-root-container-orientation = 'auto'
+
+# Mouse follows focus when focused monitor changes
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# Enable auto-unhiding of hidden mac apps when they are activated
+automatically-unhide-macos-hidden-apps = true
+
+# Disable focus-follows-mouse (mouse movement won't shift window focus)
+# Set to true if you prefer hover-to-focus behavior.
+focus-follows-mouse.enabled = false
+
+# Custom Gaps (Aesthetic spacing around windows)
+# This adds a beautiful 8px margin to separate windows and screen edges.
+gaps.inner.horizontal = 8
+gaps.inner.vertical =   8
+gaps.outer.left =       8
+gaps.outer.bottom =     8
+gaps.outer.top =        8
+gaps.outer.right =      8
+
+# List of workspaces that should stay alive even when empty
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
+# Keyboard layout mapping preset
+key-mapping.preset = 'qwerty'
+
+# =============================================================================
+# Main Keybindings Mode
+# =============================================================================
+[mode.main.binding]
+
+    # --- Layouts & Toggles ---
+    # Cycle between 'tiles' (tiling) and 'accordion' (focused window takes center stage)
+    # Similar to cycling layouts in Amethyst
+    alt-space = 'layout tiles accordion'
+
+    # Toggle current window between Tiling (managed) and Floating (free-moving)
+    # Essential for managing quick dialogs or popups
+    alt-f = 'layout floating tiling'
+    alt-shift-f = 'macos-native-fullscreen'
+
+    # Set orientation of the active container (horizontal / vertical)
+    alt-s = 'layout horizontal'
+    alt-v = 'layout vertical'
+
+    # --- Focus Window (Navigate between windows) ---
+    # Vim style:
+    alt-h = 'focus left'
+    alt-j = 'focus down'
+    alt-k = 'focus up'
+    alt-l = 'focus right'
+    # Arrow keys style:
+    alt-left = 'focus left'
+    alt-down = 'focus down'
+    alt-up = 'focus up'
+    alt-right = 'focus right'
+
+    # --- Move Window (Swap window position) ---
+    # Vim style:
+    alt-shift-h = 'move left'
+    alt-shift-j = 'move down'
+    alt-shift-k = 'move up'
+    alt-shift-l = 'move right'
+    # Arrow keys style:
+    alt-shift-left = 'move left'
+    alt-shift-down = 'move down'
+    alt-shift-up = 'move up'
+    alt-shift-right = 'move right'
+
+    # --- Resize Mode ---
+    # Press Alt + R to enter Resize Mode (explained below)
+    alt-r = 'mode resize'
+
+    # --- Navigate Workspaces (Virtual Spaces) ---
+    alt-1 = 'workspace 1'
+    alt-2 = 'workspace 2'
+    alt-3 = 'workspace 3'
+    alt-4 = 'workspace 4'
+    alt-5 = 'workspace 5'
+    alt-6 = 'workspace 6'
+    alt-7 = 'workspace 7'
+    alt-8 = 'workspace 8'
+    alt-9 = 'workspace 9'
+
+    # --- Move Windows to Workspaces ---
+    alt-shift-1 = 'move-node-to-workspace 1'
+    alt-shift-2 = 'move-node-to-workspace 2'
+    alt-shift-3 = 'move-node-to-workspace 3'
+    alt-shift-4 = 'move-node-to-workspace 4'
+    alt-shift-5 = 'move-node-to-workspace 5'
+    alt-shift-6 = 'move-node-to-workspace 6'
+    alt-shift-7 = 'move-node-to-workspace 7'
+    alt-shift-8 = 'move-node-to-workspace 8'
+    alt-shift-9 = 'move-node-to-workspace 9'
+
+    # --- Monitor Controls (Multi-Monitor setups) ---
+    # Focus other monitors relative to current
+    alt-ctrl-left = 'focus-monitor prev'
+    alt-ctrl-right = 'focus-monitor next'
+    alt-ctrl-h = 'focus-monitor prev'
+    alt-ctrl-l = 'focus-monitor next'
+
+    # Move active window to another monitor
+    alt-ctrl-shift-left = 'move-node-to-monitor --wrap-around prev'
+    alt-ctrl-shift-right = 'move-node-to-monitor --wrap-around next'
+    alt-ctrl-shift-h = 'move-node-to-monitor --wrap-around prev'
+    alt-ctrl-shift-l = 'move-node-to-monitor --wrap-around next'
+
+    # Move entire workspace to another monitor
+    alt-ctrl-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+
+    # --- Utility / Back & Forth ---
+    # Toggle back to your last active workspace instantly (super handy!)
+    alt-tab = 'workspace-back-and-forth'
+
+    # Enter service mode (Alt + Shift + ;) for system commands
+    alt-shift-semicolon = 'mode service'
+
+
+# =============================================================================
+# Resize Mode
+# =============================================================================
+# Makes resizing windows very easy without clashing with standard typing.
+# Enter via Alt+R. Adjust sizes using HJKL or Arrows. Exit with Esc or Enter.
+[mode.resize.binding]
+    h = 'resize width -50'
+    j = 'resize height +50'
+    k = 'resize height -50'
+    l = 'resize width +50'
+
+    left = 'resize width -50'
+    down = 'resize height +50'
+    up = 'resize height -50'
+    right = 'resize width +50'
+
+    enter = 'mode main'
+    esc = 'mode main'
+
+
+# =============================================================================
+# Service Mode
+# =============================================================================
+# Diagnostic and emergency controls. Enter via Alt+Shift+Semicolon (alt-shift-;).
+[mode.service.binding]
+    r = ['flatten-workspace-tree', 'mode main']  # Reset workspace layout
+    f = ['layout floating tiling', 'mode main']  # Toggle floating
+    backspace = ['close-all-windows-but-current', 'mode main']
+    
+    # Reload config manually and return to main mode
+    esc = ['reload-config', 'mode main']
+    enter = 'mode main'
+
+
+# =============================================================================
+# Window Rules (Automatic Floating)
+# =============================================================================
+# Specific utility apps are better off floating rather than tiling (e.g. settings, Finder).
+# You can find an app's ID by running `aerospace list-apps` in your terminal.
+
+# macOS System Settings
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+
+# Finder (file explorer)
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'layout floating'
+
+# Calculator
+[[on-window-detected]]
+if.app-id = 'com.apple.calculator'
+run = 'layout floating'
+
+# Activity Monitor
+[[on-window-detected]]
+if.app-id = 'com.apple.ActivityMonitor'
+run = 'layout floating'
+
+# App Store
+[[on-window-detected]]
+if.app-id = 'com.apple.AppStore'
+run = 'layout floating'
+
+# Keychain Access
+[[on-window-detected]]
+if.app-id = 'com.apple.keychainaccess'
+run = 'layout floating'
