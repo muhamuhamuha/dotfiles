@@ -1,6 +1,6 @@
 ## Install
 
-`git clone --depth=1 https://github.com/muhamuhamuha/.vimrc.git ~/dotfiles`
+`git clone --depth=1 https://github.com/muhamuhamuha/dotfiles.git ~/dotfiles`
 
 ## Symlink
 
